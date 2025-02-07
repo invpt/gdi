@@ -30,7 +30,7 @@ func (c *ContainerBuilder) RegisterHook(h RegistrationHook) {
 func (c *ContainerBuilder) Register(constructor any) {
 	value := reflect.ValueOf(constructor)
 	if value.Kind() != reflect.Func {
-		panic("When registering you must pass a constructor")
+		c.values[value.Type()] = value
 	}
 	c.constructors[value.Type().Out(0)] = value
 }
